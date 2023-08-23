@@ -9,10 +9,10 @@
   "author": "Adobe",
   "type": "module",
   "bin": {
-    "@adobe/ims-programmatic-auth": "bin/cjs/index.js"
+    "@adobe/ims-programmatic-auth": "./src/index.js"
   },
   "exports": {
-    "import": "./bin/mjs/auth.js"
+    "import": "./src/auth.js"
   },
   "license": "Apache-2.0",
   "devDependencies": {

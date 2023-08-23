@@ -1,12 +1,8 @@
 #!/usr/bin/env node
-
-import auth from './auth'
+import auth from './auth.js'
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers'
-// import chalk from 'chalk';
-// TODO
-// @ts-ignore
-const chalk = (...args) => import('chalk').then(({default: chalk}) => chalk(...args));
+import chalk from 'chalk';
 
 const argv = yargs(hideBin(process.argv))
   .scriptName('@adobe/ims-programmatic-auth')
