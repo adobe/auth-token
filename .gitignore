@@ -1,0 +1,4 @@
+node_modules
+.DS_STORE
+credentials.json
+test-script.sh
