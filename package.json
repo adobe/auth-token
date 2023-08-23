@@ -1,0 +1,29 @@
+{
+  "name": "@adobe/ims-programmatic-auth",
+  "version": "1.0.0",
+  "description": "[![Version](https://img.shields.io/npm/v/@adobe/ims-programmatic-auth.svg)](https://npmjs.org/package/@adobe/ims-programmatic-auth) [![Downloads/week](https://img.shields.io/npm/dw/@adobe/ims-programmatic-auth.svg)](https://npmjs.org/package/@adobe/ims-programmatic-auth) [![codecov](https://codecov.io/gh/adobe/ims-programmatic-auth/branch/master/graph/badge.svg)](https://codecov.io/gh/adobe/ims-programmatic-auth) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/ims-programmatic-auth.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/ims-programmatic-auth/context:javascript)",
+  "scripts": {
+    "build": "rm -rf build/* -y && tsc -p tsconfig.json && tsc -p tsconfig-npx.json && build-middleware/declare-packages && chmod ugo+x bin/cjs/index.js",
+    "test": "npm run build && echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adobe",
+  "type": "module",
+  "bin": {
+    "@adobe/ims-programmatic-auth": "bin/cjs/index.js"
+  },
+  "exports": {
+    "import": "./bin/mjs/auth.js"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/yargs": "^17.0.24",
+    "husky": "^8.0.3",
+    "jest": "^29.6.3",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "node-fetch": "^3.3.2",
+    "yargs": "^17.7.2"
+  }
+}

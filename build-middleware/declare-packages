@@ -1,0 +1,11 @@
+cat >bin/cjs/package.json <<!EOF
+{
+    "type": "commonjs"
+}
+!EOF
+
+cat >bin/mjs/package.json <<!EOF
+{
+    "type": "module"
+}
+!EOF
