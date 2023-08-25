@@ -1,10 +1,10 @@
-[![Version](https://img.shields.io/npm/v/@adobe/ims-programmatic-auth.svg)](https://npmjs.org/package/@adobe/ims-programmatic-auth)
-[![Downloads/week](https://img.shields.io/npm/dw/@adobe/ims-programmatic-auth.svg)](https://npmjs.org/package/@adobe/ims-programmatic-auth)
-[![codecov](https://codecov.io/gh/adobe/ims-programmatic-auth/branch/master/graph/badge.svg)](https://codecov.io/gh/adobe/ims-programmatic-auth)
+[![Version](https://img.shields.io/npm/v/@adobe/auth-token.svg)](https://npmjs.org/package/@adobe/auth-token)
+[![Downloads/week](https://img.shields.io/npm/dw/@adobe/auth-token.svg)](https://npmjs.org/package/@adobe/auth-token)
+[![codecov](https://codecov.io/gh/adobe/auth-token/branch/master/graph/badge.svg)](https://codecov.io/gh/adobe/auth-token)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/ims-programmatic-auth.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/ims-programmatic-auth/context:javascript)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/auth-token.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/auth-token/context:javascript)
 
-# ims-programmatic-auth
+# auth-token
 
 Retrieve an Adobe access token through the 2-legged Oauth server-to-server flow
 
@@ -19,40 +19,10 @@ Instructions for how to download/install the code onto your machine.
 Example:
 
 ```
-npm install --save @adobe/ims-programmatic-auth
+npm install --save @adobe/auth-token
 ```
 
 ### Common Usage
-
-Usage instructions for your code.
-
-Promise based example:
-
-```javascript
-const auth = require("@adobe/ims-programmatic-auth");
-
-auth(config)
-  .then((tokenResponse) => console.log(tokenResponse))
-  .catch((error) => console.log(error));
-```
-
-Async/Await based example:
-
-```javascript
-const auth = require("@adobe/ims-programmatic-auth");
-
-let tokenResponse = await auth(config);
-console.log(tokenResponse);
-```
-
-or (if you don't care about the other properties in the token response)
-
-```javascript
-const auth = require("@adobe/ims-programmatic-auth");
-
-let { access_token } = await auth(config);
-console.log(access_token);
-```
 
 #### Config object
 
@@ -64,6 +34,50 @@ The config object is where you pass in all the required and optional parameters 
 | clientSecret | Client Secret    | true     | String                                  |                 |
 | scope        | scope            | true     | Comma separated String or Array<String> |                 |
 | env          |                  | false    | String                                  | prod OR stage   |
+
+Usage instructions for your code.
+
+#### Importing @adobe/auth-token
+
+This library is ESM first:
+
+```javascript
+import { auth } from '@adobe/auth-token';
+```
+
+Usage in CommonJS modules:
+
+```javascript
+const auth = (...args) => import('@adobe/auth-token').then(({ auth: adobeAuth }) => adobeAuth(...args));
+```
+
+Promise-based example:
+
+```javascript
+import { auth } from '@adobe/auth-token';
+const config = {
+    clientId: "your-client-id",
+    clientSecret: "your-client-secret",
+    scope: "your-scopes"
+}
+
+auth(config)
+  .then((tokenResponse) => console.log(tokenResponse))
+  .catch((error) => console.log(error));
+```
+
+Async/Await based example:
+
+```javascript
+import { auth } from '@adobe/auth-token';
+const config = {
+  clientId: "your-client-id",
+  clientSecret: "your-client-secret",
+  scope: "your-scopes"
+}
+
+const { access_token, token_type, expires_in } = await auth(config);
+```
 
 In order to determine which **scope** you need to register for you can look them up by product in this [handy table](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/Scopes.md).
 
@@ -81,31 +95,6 @@ const config = {
   scope: ["ent_dataservices_sdk", "reactor_publisher"],
   env: "stage"
 };
-```
-
-#### Response Object
-
-The response object contains three keys:
-
-- `token_type`
-- `access_token`
-- `expires_in`
-
-#### Example
-
-```javascript
-const auth = require("@adobe/ims-programmatic-auth");
-const fs = require("fs");
-
-const config = {
-  clientId: "asasdfasf",
-  clientSecret: "aslfjasljf-=asdfalasjdf==asdfa",
-  scope: "ent_dataservices_sdk",
-};
-
-auth(config)
-  .then((response) => console.log(response['access_token']))
-  .catch((error) => console.log(error));
 ```
 
 ### Contributing
