@@ -12,12 +12,26 @@ governing permissions and limitations under the License.
 
 import fetch from 'node-fetch';
 
-// export default async function auth({ clientId, clientSecret, scope }: AuthArgs) {
-export async function auth({ clientId, clientSecret, scope }) {
+type AuthArgs = {
+  clientId: string,
+  clientSecret: string,
+  scope: string,
+  environment: 'prod' | 'stage' | string,
+}
+
+type AuthResponse = {
+  access_token?: string,
+}
+
+export async function auth({ clientId, clientSecret, scope, environment }: AuthArgs) {
   const headers = {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
   };
-  const url = 'https://ims-na1-stg1.adobelogin.com/ims/token/v3';
+
+  let url = 'https://ims-na1.adobelogin.com/ims/token/v3';
+  if (environment === 'stage') {
+    url = 'https://ims-na1-stg1.adobelogin.com/ims/token/v3';
+  }
   const method = 'POST';
   const body = new URLSearchParams();
   body.append('grant_type', 'client_credentials');
@@ -26,7 +40,7 @@ export async function auth({ clientId, clientSecret, scope }) {
   body.append('scope', scope);
 
   const response = await fetch(url, { headers, method, body: body.toString() });
-  const responseBody = await response.json();
+  const responseBody = await response.json() as AuthResponse;
 
   if (!responseBody?.['access_token']) {
     throw new Error(JSON.stringify(responseBody));

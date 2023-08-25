@@ -15,7 +15,7 @@ governing permissions and limitations under the License.
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers'
 import chalk from 'chalk';
-import { auth } from './auth.js'
+import { auth } from './auth'
 
 const argv = yargs(hideBin(process.argv))
   .scriptName('@adobe/ims-programmatic-auth')
@@ -54,12 +54,10 @@ const argv = yargs(hideBin(process.argv))
 (async () => {
   try {
     const args = {
-      // @ts-ignore
       clientId: argv['client-id'],
-      // @ts-ignore
       clientSecret: argv['client-secret'],
-      // @ts-ignore
-      scope: argv.scope
+      scope: argv.scope,
+      environment: argv.environment
     };
 
     const accessToken = await auth(args);
