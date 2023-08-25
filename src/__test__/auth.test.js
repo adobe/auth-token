@@ -11,12 +11,78 @@ governing permissions and limitations under the License.
 */
 
 import { auth } from '../../bin/auth';
+import { server as mswServer, waitForRequest } from '../../mocks/msw-server.js';
+import { TOKEN_EXCHANGE_ENDPOINT, failHandler } from '../../mocks/auth/handlers.js';
 
 describe('oauth', () => {
-  test('should pass', () => {
-    jest.spyOn(console, 'error').mockImplementationOnce(() => {});
+  test('call the prod endpoint with the expected shape', async () => {
+    const clientId = 'abc-client-id';
+    const clientSecret = 'def-client-secret';
+    const scope = 'openid,AdobeID,read_organizations';
+    const environment = 'prod';
 
-    auth({});
-    expect(console.error).toHaveBeenCalledTimes(1);
+    // Establish a request listener but don't resolve it yet.
+    const pendingRequest = waitForRequest('POST', TOKEN_EXCHANGE_ENDPOINT)
+
+    // make the call
+    await auth({ clientId, clientSecret, scope, environment });
+
+    // Await the request and get its reference.
+    const request = await pendingRequest
+    const bodyParams = new URLSearchParams(request.body);
+    const [ headersSymbolName ] = Object.getOwnPropertySymbols(request.headers);
+    expect(request.url.href.includes('ims-na1.adobelogin.com/ims/token/v3')).toBeTruthy();
+    expect(request.headers[headersSymbolName]['content-type']).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
+    expect(bodyParams.get('grant_type')).toEqual('client_credentials');
+    expect(bodyParams.get('client_id')).toEqual(clientId);
+    expect(bodyParams.get('client_secret')).toEqual(clientSecret);
+    expect(bodyParams.get('scope')).toEqual(scope);
+  });
+
+  test('call the stage endpoint with the expected shape', async () => {
+    const clientId = 'abc-client-id';
+    const clientSecret = 'def-client-secret';
+    const scope = 'openid,AdobeID,read_organizations';
+    const environment = 'stage';
+
+    // Establish a request listener but don't resolve it yet.
+    const pendingRequest = waitForRequest('POST', TOKEN_EXCHANGE_ENDPOINT)
+
+    // make the call
+    await auth({ clientId, clientSecret, scope, environment });
+
+    // Await the request and get its reference.
+    const request = await pendingRequest
+    const bodyParams = new URLSearchParams(request.body);
+    const [ headersSymbolName ] = Object.getOwnPropertySymbols(request.headers);
+    expect(request.url.href.includes('ims-na1-stg1.adobelogin.com/ims/token/v3')).toBeTruthy();
+    expect(request.headers[headersSymbolName]['content-type']).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
+    expect(bodyParams.get('grant_type')).toEqual('client_credentials');
+    expect(bodyParams.get('client_id')).toEqual(clientId);
+    expect(bodyParams.get('client_secret')).toEqual(clientSecret);
+    expect(bodyParams.get('scope')).toEqual(scope);
+  });
+
+  test('call the stage endpoint with the expected shape', async () => {
+    const clientId = 'abc-client-id';
+    const clientSecret = 'def-client-secret';
+    const scope = 'openid,AdobeID,read_organizations';
+    const environment = 'stage';
+
+    const access_token = await auth({
+      clientId,
+      clientSecret,
+      scope,
+      environment,
+    });
+    expect(access_token).toEqual('12345-success-token');
+  });
+
+  test("throws an error when the response doesn't have an access token", async () => {
+    mswServer.use(failHandler);
+
+    await expect(() => auth({}))
+      .rejects
+      .toThrowError('There was a problem exchanging a token')
   });
 });
