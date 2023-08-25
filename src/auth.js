@@ -10,23 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-// https://www.sensedeep.com/blog/posts/2021/how-to-create-single-source-npm-module.html
 import fetch from 'node-fetch';
 
-// type AuthArgs = {
-//   clientId: string;
-//   clientSecret: string;
-//   scope: string;
-// }
-//
-// type ResponseBody = {
-//   access_token?: string;
-//   error?: string;
-//   error_description?: string;
-// }
-
 // export default async function auth({ clientId, clientSecret, scope }: AuthArgs) {
-export default async function auth({ clientId, clientSecret, scope }) {
+export async function auth({ clientId, clientSecret, scope }) {
   const headers = {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
   };
@@ -38,9 +25,7 @@ export default async function auth({ clientId, clientSecret, scope }) {
   body.append('client_secret', clientSecret);
   body.append('scope', scope);
 
-  // @ts-ignore
   const response = await fetch(url, { headers, method, body: body.toString() });
-  // const responseBody = await response.json() as ResponseBody
   const responseBody = await response.json();
 
   if (!responseBody?.['access_token']) {
