@@ -21,8 +21,9 @@
     "outDir": "bin",
     "target": "esnext",
     "module": "esnext",
+    "removeComments": false,
   },
   "compileOnSave": false,
   "exclude": ["node_modules", "dist", "src/**/*.test.js"],
-  "include": ["src"]
+  "include": ["src"],
 }
