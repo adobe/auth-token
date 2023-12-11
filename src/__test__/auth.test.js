@@ -63,7 +63,7 @@ describe('oauth', () => {
     expect(bodyParams.get('scope')).toEqual(scope);
   });
 
-  test('call the stage endpoint with the expected shape', async () => {
+  test('can receive an access token response', async () => {
     const clientId = 'abc-client-id';
     const clientSecret = 'def-client-secret';
     const scope = 'openid,AdobeID,read_organizations';
@@ -75,6 +75,7 @@ describe('oauth', () => {
       scope,
       environment,
     });
+    // this access token comes from handlers.js
     expect(access_token).toEqual('12345-success-token');
   });
 

@@ -14,6 +14,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import chalk from 'chalk';
 import { auth } from './auth';
+const authSchemes = ['oauth-server-to-server'];
 const argv = yargs(hideBin(process.argv))
     .scriptName('@adobe/ims-programmatic-auth')
     .usage('Usage: $0 [options]')
@@ -40,6 +41,12 @@ const argv = yargs(hideBin(process.argv))
         default: 'prod',
         demandOption: true
     },
+    'auth-scheme': {
+        type: 'string',
+        description: 'The method to obtain an access token',
+        choices: authSchemes,
+        default: 'oauth-server-to-server',
+    },
     verbose: {
         alias: 'v',
         type: 'boolean'
@@ -48,6 +55,11 @@ const argv = yargs(hideBin(process.argv))
     .epilogue('For more information, see https://www.npmjs.com/package/@adobe/ims-programmatic-auth.')
     .parseSync();
 (async () => {
+    // in the future, there may be additional auth schemes other than oauth-server-to-server
+    if (!authSchemes.includes(argv['auth-scheme'])) {
+        console.error('Unknown auth scheme: ' + argv['auth-scheme']);
+        return;
+    }
     try {
         const args = {
             clientId: argv['client-id'],

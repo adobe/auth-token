@@ -13,3 +13,8 @@ governing permissions and limitations under the License.
 test('should pass', () => {
   expect(1).toBe(1);
 });
+
+// test('it can call the stage endpoint');
+// test('it can call the prod endpoint');
+// test('it can call with the "auth-scheme" option');
+// test('it fails when "auth-scheme" is unknown');
