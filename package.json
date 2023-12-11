@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.1",
   "description": "[![Version](https://img.shields.io/npm/v/@adobe/ims-programmatic-auth.svg)](https://npmjs.org/package/@adobe/ims-programmatic-auth) [![Downloads/week](https://img.shields.io/npm/dw/@adobe/ims-programmatic-auth.svg)](https://npmjs.org/package/@adobe/ims-programmatic-auth) [![codecov](https://codecov.io/gh/adobe/ims-programmatic-auth/branch/master/graph/badge.svg)](https://codecov.io/gh/adobe/ims-programmatic-auth) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/adobe/ims-programmatic-auth.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/adobe/ims-programmatic-auth/context:javascript)",
   "scripts": {
-    "build": "rm -rf bin/* -y && tsc -p tsconfig.json",
+    "build": "rm -rf bin/* && tsc -p tsconfig.json",
     "test": "npm run build && npm run jest",
     "test:watch": "npm run build && npm run jest:watch",
     "jest": "node --no-warnings --experimental-vm-modules $( [ -f ./node_modules/.bin/jest ] && echo ./node_modules/.bin/jest || which jest )",
