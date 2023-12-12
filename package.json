@@ -1,0 +1,57 @@
+{
+  "name": "@adobe/auth-token",
+  "version": "1.0.0-beta.3",
+  "description": "Obtain an access token from Adobe",
+  "scripts": {
+    "build": "rm -rf bin/* && tsc -p tsconfig.json",
+    "test": "npm run build && npm run jest",
+    "test:watch": "npm run build && npm run jest:watch",
+    "jest": "node --no-warnings --experimental-vm-modules $( [ -f ./node_modules/.bin/jest ] && echo ./node_modules/.bin/jest || which jest )",
+    "jest:watch": "node --no-warnings --experimental-vm-modules $( [ -f ./node_modules/.bin/jest ] && echo ./node_modules/.bin/jest || which jest ) --watch",
+    "format": "prettier --write src/**/*.js"
+  },
+  "author": {
+    "name": "Adobe Systems",
+    "url": "http://adobe.com",
+    "email": "reactor@adobe.com"
+  },
+  "keywords": [
+    "adobe",
+    "access token",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/adobe/auth-token.git"
+  },
+  "type": "module",
+  "bin": {
+    "auth-token": "src/index.ts"
+  },
+  "exports": {
+    "import": "./src/auth.js"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/preset-typescript": "^7.22.11",
+    "@jest/globals": "^29.6.4",
+    "@types/jest": "^29.5.4",
+    "@types/yargs": "^17.0.24",
+    "husky": "^8.0.3",
+    "jest": "^29.6.4",
+    "lint-staged": "^14.0.1",
+    "msw": "^1.2.4",
+    "prettier": "3.0.2",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "node-fetch": "^3.3.2",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=18.19.0"
+  }
+}
