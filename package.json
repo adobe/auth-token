@@ -22,11 +22,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:adobe/auth-token.git"
+    "url": "git+ssh://git@github.com/adobe/auth-token.git"
   },
   "type": "module",
   "bin": {
-    "@adobe/auth-token": "src/index.ts"
+    "auth-token": "src/index.ts"
   },
   "exports": {
     "import": "./src/auth.js"
