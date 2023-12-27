@@ -29,10 +29,9 @@ describe('oauth', () => {
 
     // Await the request and get its reference.
     const request = await pendingRequest
-    const bodyParams = new URLSearchParams(request.body);
-    const [ headersSymbolName ] = Object.getOwnPropertySymbols(request.headers);
-    expect(request.url.href.includes('ims-na1.adobelogin.com/ims/token/v3')).toBeTruthy();
-    expect(request.headers[headersSymbolName]['content-type']).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
+    const bodyParams = new URLSearchParams(await request.text());
+    expect(request.url.includes('ims-na1.adobelogin.com/ims/token/v3')).toBeTruthy();
+    expect(request.headers.get('content-type')).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
     expect(bodyParams.get('grant_type')).toEqual('client_credentials');
     expect(bodyParams.get('client_id')).toEqual(clientId);
     expect(bodyParams.get('client_secret')).toEqual(clientSecret);
@@ -53,10 +52,9 @@ describe('oauth', () => {
 
     // Await the request and get its reference.
     const request = await pendingRequest
-    const bodyParams = new URLSearchParams(request.body);
-    const [ headersSymbolName ] = Object.getOwnPropertySymbols(request.headers);
-    expect(request.url.href.includes('ims-na1-stg1.adobelogin.com/ims/token/v3')).toBeTruthy();
-    expect(request.headers[headersSymbolName]['content-type']).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
+    const bodyParams = new URLSearchParams(await request.text());
+    expect(request.url.includes('ims-na1-stg1.adobelogin.com/ims/token/v3')).toBeTruthy();
+    expect(request.headers.get('content-type')).toEqual('application/x-www-form-urlencoded;charset=UTF-8');
     expect(bodyParams.get('grant_type')).toEqual('client_credentials');
     expect(bodyParams.get('client_id')).toEqual(clientId);
     expect(bodyParams.get('client_secret')).toEqual(clientSecret);
@@ -84,6 +82,6 @@ describe('oauth', () => {
 
     await expect(() => auth({}))
       .rejects
-      .toThrowError('There was a problem exchanging a token')
+      .toThrow('There was a problem exchanging a token')
   });
 });

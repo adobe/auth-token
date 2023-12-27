@@ -9,22 +9,18 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { rest } from 'msw';
+import { HttpResponse, http } from 'msw';
 
 export const TOKEN_EXCHANGE_ENDPOINT = '*/ims/token/v3*';
 
-const successHandler = rest.post(TOKEN_EXCHANGE_ENDPOINT, (req, res, ctx) => {
-  return res(
-    // Respond with a 200 status code
-    ctx.status(200),
-    ctx.json({ access_token: '12345-success-token' })
-  );
+const successHandler = http.post(TOKEN_EXCHANGE_ENDPOINT, () => {
+  return HttpResponse.json({ access_token: '12345-success-token' });
 });
 
-export const failHandler = rest.post(TOKEN_EXCHANGE_ENDPOINT, (req, res, ctx) => {
-  return res(
-    ctx.status(400),
-    ctx.json({ message: 'There was a problem exchanging a token' })
+export const failHandler = http.post(TOKEN_EXCHANGE_ENDPOINT, () => {
+  return HttpResponse.json(
+    { message: 'There was a problem exchanging a token' },
+    { status: 400 },
   );
 });
 
