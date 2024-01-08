@@ -44,5 +44,5 @@ export async function auth({ clientId, clientSecret, scope, environment }: AuthA
     throw new Error(JSON.stringify(responseBody));
   }
 
-  return responseBody['access_token'];
+  return responseBody;
 }
