@@ -78,7 +78,7 @@ const argv = yargs(hideBin(process.argv))
     const tokenResponse = await auth(args);
 
     if (argv.verbose || argv.v) {
-      console.log(chalk.green(tokenResponse));
+      console.log(chalk.green(JSON.stringify(tokenResponse)));
     }
 
     return tokenResponse
