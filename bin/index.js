@@ -67,11 +67,12 @@ const argv = yargs(hideBin(process.argv))
             scope: argv.scope,
             environment: argv.environment
         };
-        const accessToken = await auth(args);
+        // expecting tokenResponse = { access_token, token_type, expires_in }
+        const tokenResponse = await auth(args);
         if (argv.verbose || argv.v) {
-            console.log(chalk.green(accessToken));
+            console.log(chalk.green(tokenResponse));
         }
-        return accessToken;
+        return tokenResponse;
     }
     catch (e) {
         console.error(chalk.red(e));
