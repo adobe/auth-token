@@ -60,6 +60,7 @@ const argv = yargs(hideBin(process.argv))
         console.error('Unknown auth scheme: ' + argv['auth-scheme']);
         return;
     }
+    console.log('scope was', argv.scope);
     try {
         const args = {
             clientId: argv['client-id'],
@@ -70,7 +71,7 @@ const argv = yargs(hideBin(process.argv))
         // expecting tokenResponse = { access_token, token_type, expires_in }
         const tokenResponse = await auth(args);
         if (argv.verbose || argv.v) {
-            console.log(chalk.green(tokenResponse));
+            console.log(chalk.green(JSON.stringify(tokenResponse)));
         }
         return tokenResponse;
     }

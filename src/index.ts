@@ -66,6 +66,7 @@ const argv = yargs(hideBin(process.argv))
     return;
   }
 
+  console.log('scope was', argv.scope)
   try {
     const args = {
       clientId: argv['client-id'],
