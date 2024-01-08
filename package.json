@@ -1,6 +1,6 @@
 {
   "name": "@adobe/auth-token",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.8",
   "description": "Obtain an access token from Adobe",
   "scripts": {
     "build": "rm -rf bin/* && tsc -p tsconfig.json",
@@ -26,10 +26,10 @@
   },
   "type": "module",
   "bin": {
-    "auth-token": "src/index.ts"
+    "auth-token": "./bin/index.js"
   },
   "exports": {
-    "import": "./src/auth.js"
+    ".": "./bin/auth.js"
   },
   "license": "Apache-2.0",
   "devDependencies": {

@@ -9,7 +9,6 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import fetch from 'node-fetch';
 export async function auth({ clientId, clientSecret, scope, environment }) {
     const headers = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
