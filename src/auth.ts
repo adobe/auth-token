@@ -10,8 +10,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-// import fetch from 'node-fetch';
-
 type AuthArgs = {
   clientId: string,
   clientSecret: string,
@@ -38,8 +36,6 @@ export async function auth({ clientId, clientSecret, scope, environment }: AuthA
   body.append('client_id', clientId);
   body.append('client_secret', clientSecret);
   body.append('scope', scope);
-
-  console.log(body.toString())
 
   const response = await fetch(url, { headers, method, body: body.toString() });
   const responseBody = await response.json() as AuthResponse;
