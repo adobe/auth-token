@@ -1,0 +1,14 @@
+{
+  "development": {
+    "clientIdEnvVar": "REACTOR_IO_INTEGRATION_CLIENT_ID_DEVELOPMENT",
+    "clientSecretEnvVar": "REACTOR_IO_INTEGRATION_CLIENT_SECRET_DEVELOPMENT"
+  },
+  "stage": {
+    "clientIdEnvVar": "REACTOR_IO_INTEGRATION_CLIENT_ID_STAGE",
+    "clientSecretEnvVar": "REACTOR_IO_INTEGRATION_CLIENT_SECRET_STAGE"
+  },
+  "production": {
+    "clientIdEnvVar": "REACTOR_IO_INTEGRATION_CLIENT_ID",
+    "clientSecretEnvVar": "REACTOR_IO_INTEGRATION_CLIENT_SECRET"
+  }
+}

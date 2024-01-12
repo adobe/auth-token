@@ -13,7 +13,7 @@ type AuthArgs = {
     clientId: string;
     clientSecret: string;
     scope: string;
-    environment: 'prod' | 'stage' | string;
+    environment: 'production' | 'stage' | string;
 };
 type AuthResponse = {
     access_token?: string;

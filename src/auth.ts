@@ -14,7 +14,7 @@ type AuthArgs = {
   clientId: string,
   clientSecret: string,
   scope: string,
-  environment: 'prod' | 'stage' | string,
+  environment: 'production' | 'stage' | string,
 }
 
 type AuthResponse = {
@@ -36,7 +36,6 @@ export async function auth({ clientId, clientSecret, scope, environment }: AuthA
   body.append('client_id', clientId);
   body.append('client_secret', clientSecret);
   body.append('scope', scope);
-  console.log('body in auth token repo was', body.toString());
 
   const response = await fetch(url, { headers, method, body: body.toString() });
   const responseBody = await response.json() as AuthResponse;
