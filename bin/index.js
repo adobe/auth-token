@@ -15,7 +15,8 @@ import { hideBin } from 'yargs/helpers';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { auth } from './auth.js';
-import envConfig from './envConfig.json';
+import envConfig from './envConfig.json' assert { type: "json" };
+;
 const authSchemes = ['oauth-server-to-server'];
 const argv = yargs(hideBin(process.argv))
     .scriptName('@adobe/ims-programmatic-auth')
