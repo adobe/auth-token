@@ -1,6 +1,6 @@
 {
   "name": "@adobe/auth-token",
-  "version": "1.0.0-beta.13",
+  "version": "1.0.0",
   "description": "Obtain an access token from Adobe",
   "scripts": {
     "build": "rm -rf bin/* && tsc -p tsconfig.json",
@@ -54,6 +54,6 @@
     "yargs": "^17.7.2"
   },
   "engines": {
-    "node": ">=18.19.0"
+    "node": ">=20.17.0"
   }
 }
