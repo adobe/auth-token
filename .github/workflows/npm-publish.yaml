@@ -33,6 +33,7 @@ jobs:
       - name: Install & Test
         run: |
           npm ci
+          # test runs the build script to ensure we're always testing against the latest build
           npm test
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3

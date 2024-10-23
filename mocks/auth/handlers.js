@@ -17,7 +17,11 @@ const successHandler = rest.post(TOKEN_EXCHANGE_ENDPOINT, (req, res, ctx) => {
   return res(
     // Respond with a 200 status code
     ctx.status(200),
-    ctx.json({ access_token: '12345-success-token' })
+    ctx.json({
+      access_token: '12345-success-token',
+      token_type: 'some-token-type',
+      expires_in: 'the-future',
+    })
   );
 });
 

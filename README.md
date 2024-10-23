@@ -79,7 +79,7 @@ const config = {
 const { access_token, token_type, expires_in } = await auth(config);
 ```
 
-In order to determine which **scope** you need to register for you can look them up by product in this [handy table](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/Scopes.md).
+In order to determine which **scope** you need to register for you can look them up by product [here](https://developer.adobe.com/developer-console/docs/guides/authentication/UserAuthentication/implementation/#oauth-20-scopes).
 
 For instance if you need to be authenticated to call API's for both GDPR and User Management you would [look them up](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/Scopes.md) and find that they are:
 

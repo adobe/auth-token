@@ -13,7 +13,10 @@ type AuthArgs = {
     clientId: string;
     clientSecret: string;
     scope: string;
-    environment: 'prod' | 'stage' | string;
+    environment: 'production' | 'stage' | string;
 };
-export declare function auth({ clientId, clientSecret, scope, environment }: AuthArgs): Promise<string>;
+type AuthResponse = {
+    access_token?: string;
+};
+export declare function auth({ clientId, clientSecret, scope, environment }: AuthArgs): Promise<AuthResponse>;
 export {};

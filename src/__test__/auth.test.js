@@ -69,7 +69,7 @@ describe('oauth', () => {
     const scope = 'openid,AdobeID,read_organizations';
     const environment = 'stage';
 
-    const access_token = await auth({
+    const { access_token, token_type, expires_in } = await auth({
       clientId,
       clientSecret,
       scope,
@@ -77,6 +77,8 @@ describe('oauth', () => {
     });
     // this access token comes from handlers.js
     expect(access_token).toEqual('12345-success-token');
+    expect(token_type).toEqual('some-token-type');
+    expect(expires_in).toEqual('the-future');
   });
 
   test("throws an error when the response doesn't have an access token", async () => {

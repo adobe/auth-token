@@ -28,5 +28,5 @@ export async function auth({ clientId, clientSecret, scope, environment }) {
     if (!responseBody?.['access_token']) {
         throw new Error(JSON.stringify(responseBody));
     }
-    return responseBody['access_token'];
+    return responseBody;
 }

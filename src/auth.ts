@@ -14,7 +14,7 @@ type AuthArgs = {
   clientId: string,
   clientSecret: string,
   scope: string,
-  environment: 'prod' | 'stage' | string,
+  environment: 'production' | 'stage' | string,
 }
 
 type AuthResponse = {
@@ -44,5 +44,5 @@ export async function auth({ clientId, clientSecret, scope, environment }: AuthA
     throw new Error(JSON.stringify(responseBody));
   }
 
-  return responseBody['access_token'];
+  return responseBody;
 }

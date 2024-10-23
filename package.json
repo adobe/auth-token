@@ -1,6 +1,6 @@
 {
   "name": "@adobe/auth-token",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0",
   "description": "Obtain an access token from Adobe",
   "scripts": {
     "build": "rm -rf bin/* && tsc -p tsconfig.json",
@@ -37,6 +37,7 @@
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-typescript": "^7.22.11",
     "@jest/globals": "^29.6.4",
+    "@types/inquirer": "^9.0.7",
     "@types/jest": "^29.5.4",
     "@types/yargs": "^17.0.24",
     "husky": "^8.0.3",
@@ -48,10 +49,11 @@
   },
   "dependencies": {
     "chalk": "^5.3.0",
+    "inquirer": "^9.2.12",
     "node-fetch": "^3.3.2",
     "yargs": "^17.7.2"
   },
   "engines": {
-    "node": ">=18.19.0"
+    "node": ">=20.17.0"
   }
 }
