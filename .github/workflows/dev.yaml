@@ -5,25 +5,26 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
-  build:
-    name: 'Unit Test'
+  unit-test:
+    name: "Unit Test"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
+          node-version: 'lts/iron'
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/cache@v4
+        id: npm-cache
         with:
-          node-version: 'lts/hydrogen'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-      - name: Install & Test
-        run: |
-          npm ci
-          npm test
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Run Unit Test
+        run: npm test
