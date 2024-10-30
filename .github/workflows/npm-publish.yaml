@@ -47,7 +47,7 @@ jobs:
 
   ci-notify:
     needs: publish-npm
-    uses: adobe/reactor-uploader/.github/workflows/notify.yaml@master
+    uses: adobe/auth-token/.github/workflows/notify.yaml@master
     with:
       tag: ${{github.event.inputs.tag}}
     secrets:
