@@ -4,3 +4,4 @@ node_modules
 credentials.json
 test-script.sh
 bin
+github-backup-deployments
