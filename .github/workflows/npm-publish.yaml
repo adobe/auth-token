@@ -37,7 +37,8 @@ jobs:
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
-      #- run: npm test
+      - name: Build Production
+        run: npm run build
       - uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
@@ -49,3 +50,5 @@ jobs:
     uses: adobe/reactor-uploader/.github/workflows/notify.yaml@master
     with:
       tag: ${{github.event.inputs.tag}}
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

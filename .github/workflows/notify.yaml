@@ -11,7 +11,7 @@ on:
 jobs:
   notify-on-success:
     runs-on: ubuntu-latest
-    if: ${{ inputs.tag == 'latest'}}
+    if: ${{ inputs.tag == 'latest' }}
     steps:
       - uses: actions/checkout@v4
       - name: Get latest tag
